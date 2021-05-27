@@ -8,7 +8,6 @@ editor_options:
 ---
 
 # Skills needed to solve this assignment
-
 -   Using R and RStudio, reading data
 -   Reporting using RMarkdown
 -   Using Git and Github (for submitting the task)
