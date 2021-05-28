@@ -227,7 +227,7 @@ In the plot above we can see that the residuals are roughly normally distributed
 ```{r}
 plot(model, which = 3)
 ```
-This plot shows if residuals are spread equally along the ranges of predictors. It can be seen that the variances of the residual points doesn't increase with the value of the fitted outcome variable, suggesting constant variances in the residuals errors (or heteroscedasticity).
+This plot shows if residuals are spread equally along the ranges of predictors. It can be seen that the variances of the residual points doesn't increase or decrease with the value of the fitted outcome variable, suggesting constant variances in the residuals errors (or heteroscedasticity).
 
 # Multicolinearity
 ```{r}

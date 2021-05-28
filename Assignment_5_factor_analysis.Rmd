@@ -114,7 +114,7 @@ animal <- read.csv("E:/Google Drive UMM/PhD ELTE/Semester 2/R programming/public
 ## EDA
 
 ```{r}
-str(animal)
+glimpse(animal)
 summary(animal)
 describe(animal)
 ```
