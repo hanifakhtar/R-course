@@ -19,6 +19,7 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(reshape2)
 ```
 
 # Background
@@ -144,9 +145,10 @@ cocktail_many
 Create a matrix that shows all cocktail names as rows and all ingredients as columns. When a cocktail requires an ingredient, there should be an "X" in the cell, otherwise, the cell should remain empty. Example:
 
 ```{r}
-cs <- table(cocktail_fix$name, cocktail_fix$ingredients)
-cs <- ifelse(cs != 0, "X", "")
-cs
+cheatsheet <- dcast(cocktail_fix, name ~ ingredients, length)
+cheatsheet[cheatsheet == 0] <- ""
+cheatsheet[cheatsheet == 1] <- "X"
+cheatsheet
 ```
 
 

@@ -242,8 +242,10 @@ pain = 0.34 - 0.02 * age + 0.34 * sex - 0.01 * STAIT * 0.10 * pain_cat - 0.08 * 
 
 Compare the two models.
 ```{r}
+anova(simple_mod_final, complex_mod_final)
 model1 <- glance(simple_mod_final)
 model2 <- glance(complex_mod_final)
+
 comparison_mod <- model1 %>% 
   rbind(model2) %>% 
   mutate(model = c("simple", "complex")) %>%

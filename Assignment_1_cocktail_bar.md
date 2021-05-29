@@ -317,1437 +317,804 @@ Create a matrix that shows all cocktail names as rows and all ingredients as col
 
 
 ```r
-cs <- table(cocktail_fix$name, cocktail_fix$ingredients)
-cs <- ifelse(cs != 0, "X", "")
-cs
+cheatsheet <- dcast(cocktail_fix, name ~ ingredients, length)
 ```
 
 ```
-##                                    
-##                                     absinthe absolut citron vodka
-##   20th Century Cocktail             ""       ""                  
-##   Alexander                         ""       ""                  
-##   Aviation                          ""       ""                  
-##   Bee's Knees                       ""       ""                  
-##   Between the Sheets                ""       ""                  
-##   Bijou                             ""       ""                  
-##   Blackthorn                        ""       ""                  
-##   Blender Daiquiri                  ""       ""                  
-##   Blender Margarita                 ""       ""                  
-##   Blender Whiskey Sour              ""       ""                  
-##   Blinker                           ""       ""                  
-##   Blood and Sand                    ""       ""                  
-##   Bobby Burns                       ""       ""                  
-##   Brady Crusta                      ""       ""                  
-##   Brooklyn                          ""       ""                  
-##   Brown Derby                       ""       ""                  
-##   Carbonated Margarita              ""       ""                  
-##   Carbonated Negroni                ""       ""                  
-##   Carbonated Whiskey Sour           ""       ""                  
-##   Champs-Elysses                    ""       ""                  
-##   Chartruth                         ""       ""                  
-##   Classic Daiquiri                  ""       ""                  
-##   Clover Club                       ""       ""                  
-##   Corpse Reviver #2                 ""       ""                  
-##   Cosmopolitan (Modern/Bastardized) ""       "X"                 
-##   Daiquiri with More Lime           ""       ""                  
-##   De La Louisiane                   "X"      ""                  
-##   Fresh Lime Gimlet                 ""       ""                  
-##   Gin and Juice Agar                ""       ""                  
-##   Gin and Juice Centrifuge          ""       ""                  
-##   Gin and Tonic (Dry)               ""       ""                  
-##   Gold Rush                         ""       ""                  
-##   Hanky Panky                       ""       ""                  
-##   Hemingway Daiquiri                ""       ""                  
-##   Honeysuckle                       ""       ""                  
-##   Improved Whiskey Cocktail         ""       ""                  
-##   Jack Rose                         ""       ""                  
-##   Last Word                         ""       ""                  
-##   Manhatan (Boubon, 45% abv)        ""       ""                  
-##   Manhatan (Rye, 50% abv)           ""       ""                  
-##   Margarita                         ""       ""                  
-##   Martinez                          ""       ""                  
-##   Negroni                           ""       ""                  
-##   Old Fashioned                     ""       ""                  
-##   Old Pal                           ""       ""                  
-##   Pegu Club                         ""       ""                  
-##   Pink Lady                         ""       ""                  
-##   Pisco Sour                        ""       ""                  
-##   Rob Roy                           ""       ""                  
-##   Rusty Nail                        ""       ""                  
-##   Sidecar                           ""       ""                  
-##   Southside                         ""       ""                  
-##   Vieux Carre                       ""       ""                  
-##   Whiskey Sour                      ""       ""                  
-##   Widow's Kiss                      ""       ""                  
-##                                    
-##                                     agarclarified grapefruit juice amer picon
-##   20th Century Cocktail             ""                             ""        
-##   Alexander                         ""                             ""        
-##   Aviation                          ""                             ""        
-##   Bee's Knees                       ""                             ""        
-##   Between the Sheets                ""                             ""        
-##   Bijou                             ""                             ""        
-##   Blackthorn                        ""                             ""        
-##   Blender Daiquiri                  ""                             ""        
-##   Blender Margarita                 ""                             ""        
-##   Blender Whiskey Sour              ""                             ""        
-##   Blinker                           ""                             ""        
-##   Blood and Sand                    ""                             ""        
-##   Bobby Burns                       ""                             ""        
-##   Brady Crusta                      ""                             ""        
-##   Brooklyn                          ""                             "X"       
-##   Brown Derby                       ""                             ""        
-##   Carbonated Margarita              ""                             ""        
-##   Carbonated Negroni                ""                             ""        
-##   Carbonated Whiskey Sour           ""                             ""        
-##   Champs-Elysses                    ""                             ""        
-##   Chartruth                         ""                             ""        
-##   Classic Daiquiri                  ""                             ""        
-##   Clover Club                       ""                             ""        
-##   Corpse Reviver #2                 ""                             ""        
-##   Cosmopolitan (Modern/Bastardized) ""                             ""        
-##   Daiquiri with More Lime           ""                             ""        
-##   De La Louisiane                   ""                             ""        
-##   Fresh Lime Gimlet                 ""                             ""        
-##   Gin and Juice Agar                "X"                            ""        
-##   Gin and Juice Centrifuge          ""                             ""        
-##   Gin and Tonic (Dry)               ""                             ""        
-##   Gold Rush                         ""                             ""        
-##   Hanky Panky                       ""                             ""        
-##   Hemingway Daiquiri                ""                             ""        
-##   Honeysuckle                       ""                             ""        
-##   Improved Whiskey Cocktail         ""                             ""        
-##   Jack Rose                         ""                             ""        
-##   Last Word                         ""                             ""        
-##   Manhatan (Boubon, 45% abv)        ""                             ""        
-##   Manhatan (Rye, 50% abv)           ""                             ""        
-##   Margarita                         ""                             ""        
-##   Martinez                          ""                             ""        
-##   Negroni                           ""                             ""        
-##   Old Fashioned                     ""                             ""        
-##   Old Pal                           ""                             ""        
-##   Pegu Club                         ""                             ""        
-##   Pink Lady                         ""                             ""        
-##   Pisco Sour                        ""                             ""        
-##   Rob Roy                           ""                             ""        
-##   Rusty Nail                        ""                             ""        
-##   Sidecar                           ""                             ""        
-##   Southside                         ""                             ""        
-##   Vieux Carre                       ""                             ""        
-##   Whiskey Sour                      ""                             ""        
-##   Widow's Kiss                      ""                             ""        
-##                                    
-##                                     angostura bitters apple brandy benedictine
-##   20th Century Cocktail             ""                ""           ""         
-##   Alexander                         ""                ""           ""         
-##   Aviation                          ""                ""           ""         
-##   Bee's Knees                       ""                ""           ""         
-##   Between the Sheets                ""                ""           ""         
-##   Bijou                             ""                ""           ""         
-##   Blackthorn                        ""                ""           ""         
-##   Blender Daiquiri                  ""                ""           ""         
-##   Blender Margarita                 ""                ""           ""         
-##   Blender Whiskey Sour              ""                ""           ""         
-##   Blinker                           ""                ""           ""         
-##   Blood and Sand                    ""                ""           ""         
-##   Bobby Burns                       ""                ""           "X"        
-##   Brady Crusta                      ""                ""           ""         
-##   Brooklyn                          "X"               ""           ""         
-##   Brown Derby                       ""                ""           ""         
-##   Carbonated Margarita              ""                ""           ""         
-##   Carbonated Negroni                ""                ""           ""         
-##   Carbonated Whiskey Sour           ""                ""           ""         
-##   Champs-Elysses                    "X"               ""           ""         
-##   Chartruth                         ""                ""           ""         
-##   Classic Daiquiri                  ""                ""           ""         
-##   Clover Club                       ""                ""           ""         
-##   Corpse Reviver #2                 ""                ""           ""         
-##   Cosmopolitan (Modern/Bastardized) ""                ""           ""         
-##   Daiquiri with More Lime           ""                ""           ""         
-##   De La Louisiane                   "X"               ""           "X"        
-##   Fresh Lime Gimlet                 ""                ""           ""         
-##   Gin and Juice Agar                ""                ""           ""         
-##   Gin and Juice Centrifuge          ""                ""           ""         
-##   Gin and Tonic (Dry)               ""                ""           ""         
-##   Gold Rush                         ""                ""           ""         
-##   Hanky Panky                       ""                ""           ""         
-##   Hemingway Daiquiri                ""                ""           ""         
-##   Honeysuckle                       ""                ""           ""         
-##   Improved Whiskey Cocktail         "X"               ""           ""         
-##   Jack Rose                         "X"               "X"          ""         
-##   Last Word                         ""                ""           ""         
-##   Manhatan (Boubon, 45% abv)        "X"               ""           ""         
-##   Manhatan (Rye, 50% abv)           "X"               ""           ""         
-##   Margarita                         ""                ""           ""         
-##   Martinez                          "X"               ""           ""         
-##   Negroni                           ""                ""           ""         
-##   Old Fashioned                     "X"               ""           ""         
-##   Old Pal                           ""                ""           ""         
-##   Pegu Club                         "X"               ""           ""         
-##   Pink Lady                         ""                ""           ""         
-##   Pisco Sour                        ""                ""           ""         
-##   Rob Roy                           "X"               ""           ""         
-##   Rusty Nail                        ""                ""           ""         
-##   Sidecar                           ""                ""           ""         
-##   Southside                         ""                ""           ""         
-##   Vieux Carre                       "X"               ""           "X"        
-##   Whiskey Sour                      ""                ""           ""         
-##   Widow's Kiss                      ""                "X"          "X"        
-##                                    
-##                                     blanco tequila bourbon campari
-##   20th Century Cocktail             ""             ""      ""     
-##   Alexander                         ""             ""      ""     
-##   Aviation                          ""             ""      ""     
-##   Bee's Knees                       ""             ""      ""     
-##   Between the Sheets                ""             ""      ""     
-##   Bijou                             ""             ""      ""     
-##   Blackthorn                        ""             ""      ""     
-##   Blender Daiquiri                  ""             ""      ""     
-##   Blender Margarita                 ""             ""      ""     
-##   Blender Whiskey Sour              ""             ""      ""     
-##   Blinker                           ""             ""      ""     
-##   Blood and Sand                    ""             ""      ""     
-##   Bobby Burns                       ""             ""      ""     
-##   Brady Crusta                      ""             ""      ""     
-##   Brooklyn                          ""             ""      ""     
-##   Brown Derby                       ""             "X"     ""     
-##   Carbonated Margarita              "X"            ""      ""     
-##   Carbonated Negroni                ""             ""      "X"    
-##   Carbonated Whiskey Sour           ""             "X"     ""     
-##   Champs-Elysses                    ""             ""      ""     
-##   Chartruth                         ""             ""      ""     
-##   Classic Daiquiri                  ""             ""      ""     
-##   Clover Club                       ""             ""      ""     
-##   Corpse Reviver #2                 ""             ""      ""     
-##   Cosmopolitan (Modern/Bastardized) ""             ""      ""     
-##   Daiquiri with More Lime           ""             ""      ""     
-##   De La Louisiane                   ""             ""      ""     
-##   Fresh Lime Gimlet                 ""             ""      ""     
-##   Gin and Juice Agar                ""             ""      ""     
-##   Gin and Juice Centrifuge          ""             ""      ""     
-##   Gin and Tonic (Dry)               ""             ""      ""     
-##   Gold Rush                         ""             "X"     ""     
-##   Hanky Panky                       ""             ""      ""     
-##   Hemingway Daiquiri                ""             ""      ""     
-##   Honeysuckle                       ""             ""      ""     
-##   Improved Whiskey Cocktail         ""             ""      ""     
-##   Jack Rose                         ""             ""      ""     
-##   Last Word                         ""             ""      ""     
-##   Manhatan (Boubon, 45% abv)        ""             "X"     ""     
-##   Manhatan (Rye, 50% abv)           ""             ""      ""     
-##   Margarita                         "X"            ""      ""     
-##   Martinez                          ""             ""      ""     
-##   Negroni                           ""             ""      "X"    
-##   Old Fashioned                     ""             "X"     ""     
-##   Old Pal                           ""             ""      "X"    
-##   Pegu Club                         ""             ""      ""     
-##   Pink Lady                         ""             ""      ""     
-##   Pisco Sour                        ""             ""      ""     
-##   Rob Roy                           ""             ""      ""     
-##   Rusty Nail                        ""             ""      ""     
-##   Sidecar                           ""             ""      ""     
-##   Southside                         ""             ""      ""     
-##   Vieux Carre                       ""             ""      ""     
-##   Whiskey Sour                      ""             ""      ""     
-##   Widow's Kiss                      ""             ""      ""     
-##                                    
-##                                     centrifugeclarified grapefruit juice
-##   20th Century Cocktail             ""                                  
-##   Alexander                         ""                                  
-##   Aviation                          ""                                  
-##   Bee's Knees                       ""                                  
-##   Between the Sheets                ""                                  
-##   Bijou                             ""                                  
-##   Blackthorn                        ""                                  
-##   Blender Daiquiri                  ""                                  
-##   Blender Margarita                 ""                                  
-##   Blender Whiskey Sour              ""                                  
-##   Blinker                           ""                                  
-##   Blood and Sand                    ""                                  
-##   Bobby Burns                       ""                                  
-##   Brady Crusta                      ""                                  
-##   Brooklyn                          ""                                  
-##   Brown Derby                       ""                                  
-##   Carbonated Margarita              ""                                  
-##   Carbonated Negroni                ""                                  
-##   Carbonated Whiskey Sour           ""                                  
-##   Champs-Elysses                    ""                                  
-##   Chartruth                         ""                                  
-##   Classic Daiquiri                  ""                                  
-##   Clover Club                       ""                                  
-##   Corpse Reviver #2                 ""                                  
-##   Cosmopolitan (Modern/Bastardized) ""                                  
-##   Daiquiri with More Lime           ""                                  
-##   De La Louisiane                   ""                                  
-##   Fresh Lime Gimlet                 ""                                  
-##   Gin and Juice Agar                ""                                  
-##   Gin and Juice Centrifuge          "X"                                 
-##   Gin and Tonic (Dry)               ""                                  
-##   Gold Rush                         ""                                  
-##   Hanky Panky                       ""                                  
-##   Hemingway Daiquiri                ""                                  
-##   Honeysuckle                       ""                                  
-##   Improved Whiskey Cocktail         ""                                  
-##   Jack Rose                         ""                                  
-##   Last Word                         ""                                  
-##   Manhatan (Boubon, 45% abv)        ""                                  
-##   Manhatan (Rye, 50% abv)           ""                                  
-##   Margarita                         ""                                  
-##   Martinez                          ""                                  
-##   Negroni                           ""                                  
-##   Old Fashioned                     ""                                  
-##   Old Pal                           ""                                  
-##   Pegu Club                         ""                                  
-##   Pink Lady                         ""                                  
-##   Pisco Sour                        ""                                  
-##   Rob Roy                           ""                                  
-##   Rusty Nail                        ""                                  
-##   Sidecar                           ""                                  
-##   Southside                         ""                                  
-##   Vieux Carre                       ""                                  
-##   Whiskey Sour                      ""                                  
-##   Widow's Kiss                      ""                                  
-##                                    
-##                                     champagne acid cherry herring
-##   20th Century Cocktail             ""             ""            
-##   Alexander                         ""             ""            
-##   Aviation                          ""             ""            
-##   Bee's Knees                       ""             ""            
-##   Between the Sheets                ""             ""            
-##   Bijou                             ""             ""            
-##   Blackthorn                        ""             ""            
-##   Blender Daiquiri                  ""             ""            
-##   Blender Margarita                 ""             ""            
-##   Blender Whiskey Sour              ""             ""            
-##   Blinker                           ""             ""            
-##   Blood and Sand                    ""             "X"           
-##   Bobby Burns                       ""             ""            
-##   Brady Crusta                      ""             ""            
-##   Brooklyn                          ""             ""            
-##   Brown Derby                       ""             ""            
-##   Carbonated Margarita              ""             ""            
-##   Carbonated Negroni                ""             ""            
-##   Carbonated Whiskey Sour           ""             ""            
-##   Champs-Elysses                    ""             ""            
-##   Chartruth                         ""             ""            
-##   Classic Daiquiri                  ""             ""            
-##   Clover Club                       ""             ""            
-##   Corpse Reviver #2                 ""             ""            
-##   Cosmopolitan (Modern/Bastardized) ""             ""            
-##   Daiquiri with More Lime           ""             ""            
-##   De La Louisiane                   ""             ""            
-##   Fresh Lime Gimlet                 ""             ""            
-##   Gin and Juice Agar                ""             ""            
-##   Gin and Juice Centrifuge          "X"            ""            
-##   Gin and Tonic (Dry)               ""             ""            
-##   Gold Rush                         ""             ""            
-##   Hanky Panky                       ""             ""            
-##   Hemingway Daiquiri                ""             ""            
-##   Honeysuckle                       ""             ""            
-##   Improved Whiskey Cocktail         ""             ""            
-##   Jack Rose                         ""             ""            
-##   Last Word                         ""             ""            
-##   Manhatan (Boubon, 45% abv)        ""             ""            
-##   Manhatan (Rye, 50% abv)           ""             ""            
-##   Margarita                         ""             ""            
-##   Martinez                          ""             ""            
-##   Negroni                           ""             ""            
-##   Old Fashioned                     ""             ""            
-##   Old Pal                           ""             ""            
-##   Pegu Club                         ""             ""            
-##   Pink Lady                         ""             ""            
-##   Pisco Sour                        ""             ""            
-##   Rob Roy                           ""             ""            
-##   Rusty Nail                        ""             ""            
-##   Sidecar                           ""             ""            
-##   Southside                         ""             ""            
-##   Vieux Carre                       ""             ""            
-##   Whiskey Sour                      ""             ""            
-##   Widow's Kiss                      ""             ""            
-##                                    
-##                                     clarified lime juice
-##   20th Century Cocktail             ""                  
-##   Alexander                         ""                  
-##   Aviation                          ""                  
-##   Bee's Knees                       ""                  
-##   Between the Sheets                ""                  
-##   Bijou                             ""                  
-##   Blackthorn                        ""                  
-##   Blender Daiquiri                  ""                  
-##   Blender Margarita                 ""                  
-##   Blender Whiskey Sour              ""                  
-##   Blinker                           ""                  
-##   Blood and Sand                    ""                  
-##   Bobby Burns                       ""                  
-##   Brady Crusta                      ""                  
-##   Brooklyn                          ""                  
-##   Brown Derby                       ""                  
-##   Carbonated Margarita              "X"                 
-##   Carbonated Negroni                ""                  
-##   Carbonated Whiskey Sour           "X"                 
-##   Champs-Elysses                    ""                  
-##   Chartruth                         "X"                 
-##   Classic Daiquiri                  ""                  
-##   Clover Club                       ""                  
-##   Corpse Reviver #2                 ""                  
-##   Cosmopolitan (Modern/Bastardized) ""                  
-##   Daiquiri with More Lime           ""                  
-##   De La Louisiane                   ""                  
-##   Fresh Lime Gimlet                 ""                  
-##   Gin and Juice Agar                ""                  
-##   Gin and Juice Centrifuge          ""                  
-##   Gin and Tonic (Dry)               "X"                 
-##   Gold Rush                         ""                  
-##   Hanky Panky                       ""                  
-##   Hemingway Daiquiri                ""                  
-##   Honeysuckle                       ""                  
-##   Improved Whiskey Cocktail         ""                  
-##   Jack Rose                         ""                  
-##   Last Word                         ""                  
-##   Manhatan (Boubon, 45% abv)        ""                  
-##   Manhatan (Rye, 50% abv)           ""                  
-##   Margarita                         ""                  
-##   Martinez                          ""                  
-##   Negroni                           ""                  
-##   Old Fashioned                     ""                  
-##   Old Pal                           ""                  
-##   Pegu Club                         ""                  
-##   Pink Lady                         ""                  
-##   Pisco Sour                        ""                  
-##   Rob Roy                           ""                  
-##   Rusty Nail                        ""                  
-##   Sidecar                           ""                  
-##   Southside                         ""                  
-##   Vieux Carre                       ""                  
-##   Whiskey Sour                      ""                  
-##   Widow's Kiss                      ""                  
-##                                    
-##                                     clarified lime juice or champagne acid
-##   20th Century Cocktail             ""                                    
-##   Alexander                         ""                                    
-##   Aviation                          ""                                    
-##   Bee's Knees                       ""                                    
-##   Between the Sheets                ""                                    
-##   Bijou                             ""                                    
-##   Blackthorn                        ""                                    
-##   Blender Daiquiri                  ""                                    
-##   Blender Margarita                 ""                                    
-##   Blender Whiskey Sour              ""                                    
-##   Blinker                           ""                                    
-##   Blood and Sand                    ""                                    
-##   Bobby Burns                       ""                                    
-##   Brady Crusta                      ""                                    
-##   Brooklyn                          ""                                    
-##   Brown Derby                       ""                                    
-##   Carbonated Margarita              ""                                    
-##   Carbonated Negroni                "X"                                   
-##   Carbonated Whiskey Sour           ""                                    
-##   Champs-Elysses                    ""                                    
-##   Chartruth                         ""                                    
-##   Classic Daiquiri                  ""                                    
-##   Clover Club                       ""                                    
-##   Corpse Reviver #2                 ""                                    
-##   Cosmopolitan (Modern/Bastardized) ""                                    
-##   Daiquiri with More Lime           ""                                    
-##   De La Louisiane                   ""                                    
-##   Fresh Lime Gimlet                 ""                                    
-##   Gin and Juice Agar                ""                                    
-##   Gin and Juice Centrifuge          ""                                    
-##   Gin and Tonic (Dry)               ""                                    
-##   Gold Rush                         ""                                    
-##   Hanky Panky                       ""                                    
-##   Hemingway Daiquiri                ""                                    
-##   Honeysuckle                       ""                                    
-##   Improved Whiskey Cocktail         ""                                    
-##   Jack Rose                         ""                                    
-##   Last Word                         ""                                    
-##   Manhatan (Boubon, 45% abv)        ""                                    
-##   Manhatan (Rye, 50% abv)           ""                                    
-##   Margarita                         ""                                    
-##   Martinez                          ""                                    
-##   Negroni                           ""                                    
-##   Old Fashioned                     ""                                    
-##   Old Pal                           ""                                    
-##   Pegu Club                         ""                                    
-##   Pink Lady                         ""                                    
-##   Pisco Sour                        ""                                    
-##   Rob Roy                           ""                                    
-##   Rusty Nail                        ""                                    
-##   Sidecar                           ""                                    
-##   Southside                         ""                                    
-##   Vieux Carre                       ""                                    
-##   Whiskey Sour                      ""                                    
-##   Widow's Kiss                      ""                                    
-##                                    
-##                                     cognac cointreau cranberry juice
-##   20th Century Cocktail             ""     ""        ""             
-##   Alexander                         "X"    ""        ""             
-##   Aviation                          ""     ""        ""             
-##   Bee's Knees                       ""     ""        ""             
-##   Between the Sheets                "X"    ""        ""             
-##   Bijou                             ""     ""        ""             
-##   Blackthorn                        ""     ""        ""             
-##   Blender Daiquiri                  ""     ""        ""             
-##   Blender Margarita                 ""     "X"       ""             
-##   Blender Whiskey Sour              ""     ""        ""             
-##   Blinker                           ""     ""        ""             
-##   Blood and Sand                    ""     ""        ""             
-##   Bobby Burns                       ""     ""        ""             
-##   Brady Crusta                      "X"    ""        ""             
-##   Brooklyn                          ""     ""        ""             
-##   Brown Derby                       ""     ""        ""             
-##   Carbonated Margarita              ""     ""        ""             
-##   Carbonated Negroni                ""     ""        ""             
-##   Carbonated Whiskey Sour           ""     ""        ""             
-##   Champs-Elysses                    "X"    ""        ""             
-##   Chartruth                         ""     ""        ""             
-##   Classic Daiquiri                  ""     ""        ""             
-##   Clover Club                       ""     ""        ""             
-##   Corpse Reviver #2                 ""     "X"       ""             
-##   Cosmopolitan (Modern/Bastardized) ""     "X"       "X"            
-##   Daiquiri with More Lime           ""     ""        ""             
-##   De La Louisiane                   ""     ""        ""             
-##   Fresh Lime Gimlet                 ""     ""        ""             
-##   Gin and Juice Agar                ""     ""        ""             
-##   Gin and Juice Centrifuge          ""     ""        ""             
-##   Gin and Tonic (Dry)               ""     ""        ""             
-##   Gold Rush                         ""     ""        ""             
-##   Hanky Panky                       ""     ""        ""             
-##   Hemingway Daiquiri                ""     ""        ""             
-##   Honeysuckle                       ""     ""        ""             
-##   Improved Whiskey Cocktail         ""     ""        ""             
-##   Jack Rose                         ""     ""        ""             
-##   Last Word                         ""     ""        ""             
-##   Manhatan (Boubon, 45% abv)        ""     ""        ""             
-##   Manhatan (Rye, 50% abv)           ""     ""        ""             
-##   Margarita                         ""     "X"       ""             
-##   Martinez                          ""     ""        ""             
-##   Negroni                           ""     ""        ""             
-##   Old Fashioned                     ""     ""        ""             
-##   Old Pal                           ""     ""        ""             
-##   Pegu Club                         ""     ""        ""             
-##   Pink Lady                         ""     ""        ""             
-##   Pisco Sour                        ""     ""        ""             
-##   Rob Roy                           ""     ""        ""             
-##   Rusty Nail                        ""     ""        ""             
-##   Sidecar                           "X"    "X"       ""             
-##   Southside                         ""     ""        ""             
-##   Vieux Carre                       "X"    ""        ""             
-##   Whiskey Sour                      ""     ""        ""             
-##   Widow's Kiss                      ""     ""        ""             
-##                                    
-##                                     crem de violette curacao demerara syrup
-##   20th Century Cocktail             ""               ""      ""            
-##   Alexander                         ""               ""      "X"           
-##   Aviation                          "X"              ""      ""            
-##   Bee's Knees                       ""               ""      ""            
-##   Between the Sheets                ""               "X"     ""            
-##   Bijou                             ""               ""      ""            
-##   Blackthorn                        ""               ""      ""            
-##   Blender Daiquiri                  ""               ""      ""            
-##   Blender Margarita                 ""               ""      ""            
-##   Blender Whiskey Sour              ""               ""      ""            
-##   Blinker                           ""               ""      ""            
-##   Blood and Sand                    ""               ""      ""            
-##   Bobby Burns                       ""               ""      ""            
-##   Brady Crusta                      ""               "X"     ""            
-##   Brooklyn                          ""               ""      ""            
-##   Brown Derby                       ""               ""      ""            
-##   Carbonated Margarita              ""               ""      ""            
-##   Carbonated Negroni                ""               ""      ""            
-##   Carbonated Whiskey Sour           ""               ""      ""            
-##   Champs-Elysses                    ""               ""      ""            
-##   Chartruth                         ""               ""      ""            
-##   Classic Daiquiri                  ""               ""      ""            
-##   Clover Club                       ""               ""      ""            
-##   Corpse Reviver #2                 ""               ""      ""            
-##   Cosmopolitan (Modern/Bastardized) ""               ""      ""            
-##   Daiquiri with More Lime           ""               ""      ""            
-##   De La Louisiane                   ""               ""      ""            
-##   Fresh Lime Gimlet                 ""               ""      ""            
-##   Gin and Juice Agar                ""               ""      ""            
-##   Gin and Juice Centrifuge          ""               ""      ""            
-##   Gin and Tonic (Dry)               ""               ""      ""            
-##   Gold Rush                         ""               ""      ""            
-##   Hanky Panky                       ""               ""      ""            
-##   Hemingway Daiquiri                ""               ""      ""            
-##   Honeysuckle                       ""               ""      ""            
-##   Improved Whiskey Cocktail         ""               ""      ""            
-##   Jack Rose                         ""               ""      ""            
-##   Last Word                         ""               ""      ""            
-##   Manhatan (Boubon, 45% abv)        ""               ""      ""            
-##   Manhatan (Rye, 50% abv)           ""               ""      ""            
-##   Margarita                         ""               ""      ""            
-##   Martinez                          ""               ""      ""            
-##   Negroni                           ""               ""      ""            
-##   Old Fashioned                     ""               ""      ""            
-##   Old Pal                           ""               ""      ""            
-##   Pegu Club                         ""               "X"     ""            
-##   Pink Lady                         ""               ""      ""            
-##   Pisco Sour                        ""               ""      ""            
-##   Rob Roy                           ""               ""      ""            
-##   Rusty Nail                        ""               ""      ""            
-##   Sidecar                           ""               ""      ""            
-##   Southside                         ""               ""      ""            
-##   Vieux Carre                       ""               ""      ""            
-##   Whiskey Sour                      ""               ""      ""            
-##   Widow's Kiss                      ""               ""      ""            
-##                                    
-##                                     dolin dry vermouth drambuie dry vermouth
-##   20th Century Cocktail             ""                 ""       ""          
-##   Alexander                         ""                 ""       ""          
-##   Aviation                          ""                 ""       ""          
-##   Bee's Knees                       ""                 ""       ""          
-##   Between the Sheets                ""                 ""       ""          
-##   Bijou                             ""                 ""       ""          
-##   Blackthorn                        ""                 ""       ""          
-##   Blender Daiquiri                  ""                 ""       ""          
-##   Blender Margarita                 ""                 ""       ""          
-##   Blender Whiskey Sour              ""                 ""       ""          
-##   Blinker                           ""                 ""       ""          
-##   Blood and Sand                    ""                 ""       ""          
-##   Bobby Burns                       ""                 ""       ""          
-##   Brady Crusta                      ""                 ""       ""          
-##   Brooklyn                          ""                 ""       "X"         
-##   Brown Derby                       ""                 ""       ""          
-##   Carbonated Margarita              ""                 ""       ""          
-##   Carbonated Negroni                ""                 ""       ""          
-##   Carbonated Whiskey Sour           ""                 ""       ""          
-##   Champs-Elysses                    ""                 ""       ""          
-##   Chartruth                         ""                 ""       ""          
-##   Classic Daiquiri                  ""                 ""       ""          
-##   Clover Club                       "X"                ""       ""          
-##   Corpse Reviver #2                 ""                 ""       ""          
-##   Cosmopolitan (Modern/Bastardized) ""                 ""       ""          
-##   Daiquiri with More Lime           ""                 ""       ""          
-##   De La Louisiane                   ""                 ""       ""          
-##   Fresh Lime Gimlet                 ""                 ""       ""          
-##   Gin and Juice Agar                ""                 ""       ""          
-##   Gin and Juice Centrifuge          ""                 ""       ""          
-##   Gin and Tonic (Dry)               ""                 ""       ""          
-##   Gold Rush                         ""                 ""       ""          
-##   Hanky Panky                       ""                 ""       ""          
-##   Hemingway Daiquiri                ""                 ""       ""          
-##   Honeysuckle                       ""                 ""       ""          
-##   Improved Whiskey Cocktail         ""                 ""       ""          
-##   Jack Rose                         ""                 ""       ""          
-##   Last Word                         ""                 ""       ""          
-##   Manhatan (Boubon, 45% abv)        ""                 ""       ""          
-##   Manhatan (Rye, 50% abv)           ""                 ""       ""          
-##   Margarita                         ""                 ""       ""          
-##   Martinez                          ""                 ""       ""          
-##   Negroni                           ""                 ""       ""          
-##   Old Fashioned                     ""                 ""       ""          
-##   Old Pal                           ""                 ""       "X"         
-##   Pegu Club                         ""                 ""       ""          
-##   Pink Lady                         ""                 ""       ""          
-##   Pisco Sour                        ""                 ""       ""          
-##   Rob Roy                           ""                 ""       ""          
-##   Rusty Nail                        ""                 "X"      ""          
-##   Sidecar                           ""                 ""       ""          
-##   Southside                         ""                 ""       ""          
-##   Vieux Carre                       ""                 ""       ""          
-##   Whiskey Sour                      ""                 ""       ""          
-##   Widow's Kiss                      ""                 ""       ""          
-##                                    
-##                                     egg white fernet branca gin gin 
-##   20th Century Cocktail             ""        ""            "X" ""  
-##   Alexander                         ""        ""            ""  ""  
-##   Aviation                          ""        ""            ""  ""  
-##   Bee's Knees                       ""        ""            "X" ""  
-##   Between the Sheets                ""        ""            ""  ""  
-##   Bijou                             ""        ""            "X" ""  
-##   Blackthorn                        ""        ""            ""  ""  
-##   Blender Daiquiri                  ""        ""            ""  ""  
-##   Blender Margarita                 ""        ""            ""  ""  
-##   Blender Whiskey Sour              ""        ""            ""  ""  
-##   Blinker                           ""        ""            ""  ""  
-##   Blood and Sand                    ""        ""            ""  ""  
-##   Bobby Burns                       ""        ""            ""  ""  
-##   Brady Crusta                      ""        ""            ""  ""  
-##   Brooklyn                          ""        ""            ""  ""  
-##   Brown Derby                       ""        ""            ""  ""  
-##   Carbonated Margarita              ""        ""            ""  ""  
-##   Carbonated Negroni                ""        ""            ""  "X" 
-##   Carbonated Whiskey Sour           ""        ""            ""  ""  
-##   Champs-Elysses                    ""        ""            ""  ""  
-##   Chartruth                         ""        ""            ""  ""  
-##   Classic Daiquiri                  ""        ""            ""  ""  
-##   Clover Club                       "X"       ""            ""  ""  
-##   Corpse Reviver #2                 ""        ""            "X" ""  
-##   Cosmopolitan (Modern/Bastardized) ""        ""            ""  ""  
-##   Daiquiri with More Lime           ""        ""            ""  ""  
-##   De La Louisiane                   ""        ""            ""  ""  
-##   Fresh Lime Gimlet                 ""        ""            "X" ""  
-##   Gin and Juice Agar                ""        ""            "X" ""  
-##   Gin and Juice Centrifuge          ""        ""            "X" ""  
-##   Gin and Tonic (Dry)               ""        ""            "X" ""  
-##   Gold Rush                         ""        ""            ""  ""  
-##   Hanky Panky                       ""        "X"           "X" ""  
-##   Hemingway Daiquiri                ""        ""            ""  ""  
-##   Honeysuckle                       ""        ""            ""  ""  
-##   Improved Whiskey Cocktail         ""        ""            ""  ""  
-##   Jack Rose                         ""        ""            ""  ""  
-##   Last Word                         ""        ""            ""  ""  
-##   Manhatan (Boubon, 45% abv)        ""        ""            ""  ""  
-##   Manhatan (Rye, 50% abv)           ""        ""            ""  ""  
-##   Margarita                         ""        ""            ""  ""  
-##   Martinez                          ""        ""            ""  ""  
-##   Negroni                           ""        ""            "X" ""  
-##   Old Fashioned                     ""        ""            ""  ""  
-##   Old Pal                           ""        ""            ""  ""  
-##   Pegu Club                         ""        ""            "X" ""  
-##   Pink Lady                         "X"       ""            ""  ""  
-##   Pisco Sour                        "X"       ""            ""  ""  
-##   Rob Roy                           ""        ""            ""  ""  
-##   Rusty Nail                        ""        ""            ""  ""  
-##   Sidecar                           ""        ""            ""  ""  
-##   Southside                         ""        ""            "X" ""  
-##   Vieux Carre                       ""        ""            ""  ""  
-##   Whiskey Sour                      "X"       ""            ""  ""  
-##   Widow's Kiss                      ""        ""            ""  ""  
-##                                    
-##                                     grapefruit juice green chartreuse grenadine
-##   20th Century Cocktail             ""               ""               ""       
-##   Alexander                         ""               ""               ""       
-##   Aviation                          ""               ""               ""       
-##   Bee's Knees                       ""               ""               ""       
-##   Between the Sheets                ""               ""               ""       
-##   Bijou                             ""               "X"              ""       
-##   Blackthorn                        ""               ""               ""       
-##   Blender Daiquiri                  ""               ""               ""       
-##   Blender Margarita                 ""               ""               ""       
-##   Blender Whiskey Sour              ""               ""               ""       
-##   Blinker                           "X"              ""               ""       
-##   Blood and Sand                    ""               ""               ""       
-##   Bobby Burns                       ""               ""               ""       
-##   Brady Crusta                      ""               ""               ""       
-##   Brooklyn                          ""               ""               ""       
-##   Brown Derby                       "X"              ""               ""       
-##   Carbonated Margarita              ""               ""               ""       
-##   Carbonated Negroni                ""               ""               ""       
-##   Carbonated Whiskey Sour           ""               ""               ""       
-##   Champs-Elysses                    ""               "X"              ""       
-##   Chartruth                         ""               "X"              ""       
-##   Classic Daiquiri                  ""               ""               ""       
-##   Clover Club                       ""               ""               ""       
-##   Corpse Reviver #2                 ""               ""               ""       
-##   Cosmopolitan (Modern/Bastardized) ""               ""               ""       
-##   Daiquiri with More Lime           ""               ""               ""       
-##   De La Louisiane                   ""               ""               ""       
-##   Fresh Lime Gimlet                 ""               ""               ""       
-##   Gin and Juice Agar                ""               ""               ""       
-##   Gin and Juice Centrifuge          ""               ""               ""       
-##   Gin and Tonic (Dry)               ""               ""               ""       
-##   Gold Rush                         ""               ""               ""       
-##   Hanky Panky                       ""               ""               ""       
-##   Hemingway Daiquiri                "X"              ""               ""       
-##   Honeysuckle                       ""               ""               ""       
-##   Improved Whiskey Cocktail         ""               ""               ""       
-##   Jack Rose                         ""               ""               "X"      
-##   Last Word                         ""               "X"              ""       
-##   Manhatan (Boubon, 45% abv)        ""               ""               ""       
-##   Manhatan (Rye, 50% abv)           ""               ""               ""       
-##   Margarita                         ""               ""               ""       
-##   Martinez                          ""               ""               ""       
-##   Negroni                           ""               ""               ""       
-##   Old Fashioned                     ""               ""               ""       
-##   Old Pal                           ""               ""               ""       
-##   Pegu Club                         ""               ""               ""       
-##   Pink Lady                         ""               ""               "X"      
-##   Pisco Sour                        ""               ""               ""       
-##   Rob Roy                           ""               ""               ""       
-##   Rusty Nail                        ""               ""               ""       
-##   Sidecar                           ""               ""               ""       
-##   Southside                         ""               ""               ""       
-##   Vieux Carre                       ""               ""               ""       
-##   Whiskey Sour                      ""               ""               ""       
-##   Widow's Kiss                      ""               ""               ""       
-##                                    
-##                                     heavy cream hellfire bitters honey syrup
-##   20th Century Cocktail             ""          ""               ""         
-##   Alexander                         "X"         ""               ""         
-##   Aviation                          ""          ""               ""         
-##   Bee's Knees                       ""          ""               "X"        
-##   Between the Sheets                ""          ""               ""         
-##   Bijou                             ""          ""               ""         
-##   Blackthorn                        ""          ""               ""         
-##   Blender Daiquiri                  ""          ""               ""         
-##   Blender Margarita                 ""          "X"              ""         
-##   Blender Whiskey Sour              ""          ""               ""         
-##   Blinker                           ""          ""               ""         
-##   Blood and Sand                    ""          ""               ""         
-##   Bobby Burns                       ""          ""               ""         
-##   Brady Crusta                      ""          ""               ""         
-##   Brooklyn                          ""          ""               ""         
-##   Brown Derby                       ""          ""               "X"        
-##   Carbonated Margarita              ""          ""               ""         
-##   Carbonated Negroni                ""          ""               ""         
-##   Carbonated Whiskey Sour           ""          ""               ""         
-##   Champs-Elysses                    ""          ""               ""         
-##   Chartruth                         ""          ""               ""         
-##   Classic Daiquiri                  ""          ""               ""         
-##   Clover Club                       ""          ""               ""         
-##   Corpse Reviver #2                 ""          ""               ""         
-##   Cosmopolitan (Modern/Bastardized) ""          ""               ""         
-##   Daiquiri with More Lime           ""          ""               ""         
-##   De La Louisiane                   ""          ""               ""         
-##   Fresh Lime Gimlet                 ""          ""               ""         
-##   Gin and Juice Agar                ""          ""               ""         
-##   Gin and Juice Centrifuge          ""          ""               ""         
-##   Gin and Tonic (Dry)               ""          ""               ""         
-##   Gold Rush                         ""          ""               "X"        
-##   Hanky Panky                       ""          ""               ""         
-##   Hemingway Daiquiri                ""          ""               ""         
-##   Honeysuckle                       ""          ""               "X"        
-##   Improved Whiskey Cocktail         ""          ""               ""         
-##   Jack Rose                         ""          ""               ""         
-##   Last Word                         ""          ""               ""         
-##   Manhatan (Boubon, 45% abv)        ""          ""               ""         
-##   Manhatan (Rye, 50% abv)           ""          ""               ""         
-##   Margarita                         ""          ""               ""         
-##   Martinez                          ""          ""               ""         
-##   Negroni                           ""          ""               ""         
-##   Old Fashioned                     ""          ""               ""         
-##   Old Pal                           ""          ""               ""         
-##   Pegu Club                         ""          ""               ""         
-##   Pink Lady                         ""          ""               ""         
-##   Pisco Sour                        ""          ""               ""         
-##   Rob Roy                           ""          ""               ""         
-##   Rusty Nail                        ""          ""               ""         
-##   Sidecar                           ""          ""               ""         
-##   Southside                         ""          ""               ""         
-##   Vieux Carre                       ""          ""               ""         
-##   Whiskey Sour                      ""          ""               ""         
-##   Widow's Kiss                      ""          ""               ""         
-##                                    
-##                                     lairds applejack bottled in bond
-##   20th Century Cocktail             ""                              
-##   Alexander                         ""                              
-##   Aviation                          ""                              
-##   Bee's Knees                       ""                              
-##   Between the Sheets                ""                              
-##   Bijou                             ""                              
-##   Blackthorn                        ""                              
-##   Blender Daiquiri                  ""                              
-##   Blender Margarita                 ""                              
-##   Blender Whiskey Sour              ""                              
-##   Blinker                           ""                              
-##   Blood and Sand                    ""                              
-##   Bobby Burns                       ""                              
-##   Brady Crusta                      ""                              
-##   Brooklyn                          ""                              
-##   Brown Derby                       ""                              
-##   Carbonated Margarita              ""                              
-##   Carbonated Negroni                ""                              
-##   Carbonated Whiskey Sour           ""                              
-##   Champs-Elysses                    ""                              
-##   Chartruth                         ""                              
-##   Classic Daiquiri                  ""                              
-##   Clover Club                       ""                              
-##   Corpse Reviver #2                 ""                              
-##   Cosmopolitan (Modern/Bastardized) ""                              
-##   Daiquiri with More Lime           ""                              
-##   De La Louisiane                   ""                              
-##   Fresh Lime Gimlet                 ""                              
-##   Gin and Juice Agar                ""                              
-##   Gin and Juice Centrifuge          ""                              
-##   Gin and Tonic (Dry)               ""                              
-##   Gold Rush                         ""                              
-##   Hanky Panky                       ""                              
-##   Hemingway Daiquiri                ""                              
-##   Honeysuckle                       ""                              
-##   Improved Whiskey Cocktail         ""                              
-##   Jack Rose                         ""                              
-##   Last Word                         ""                              
-##   Manhatan (Boubon, 45% abv)        ""                              
-##   Manhatan (Rye, 50% abv)           ""                              
-##   Margarita                         ""                              
-##   Martinez                          ""                              
-##   Negroni                           ""                              
-##   Old Fashioned                     ""                              
-##   Old Pal                           ""                              
-##   Pegu Club                         ""                              
-##   Pink Lady                         "X"                             
-##   Pisco Sour                        ""                              
-##   Rob Roy                           ""                              
-##   Rusty Nail                        ""                              
-##   Sidecar                           ""                              
-##   Southside                         ""                              
-##   Vieux Carre                       ""                              
-##   Whiskey Sour                      ""                              
-##   Widow's Kiss                      ""                              
-##                                    
-##                                     lemon juice lillet blanc lime juice
-##   20th Century Cocktail             "X"         "X"          ""        
-##   Alexander                         ""          ""           ""        
-##   Aviation                          "X"         ""           ""        
-##   Bee's Knees                       "X"         ""           ""        
-##   Between the Sheets                "X"         ""           ""        
-##   Bijou                             ""          ""           ""        
-##   Blackthorn                        ""          ""           ""        
-##   Blender Daiquiri                  ""          ""           "X"       
-##   Blender Margarita                 ""          ""           "X"       
-##   Blender Whiskey Sour              "X"         ""           ""        
-##   Blinker                           ""          ""           ""        
-##   Blood and Sand                    ""          ""           ""        
-##   Bobby Burns                       ""          ""           ""        
-##   Brady Crusta                      "X"         ""           ""        
-##   Brooklyn                          ""          ""           ""        
-##   Brown Derby                       ""          ""           ""        
-##   Carbonated Margarita              ""          ""           ""        
-##   Carbonated Negroni                ""          ""           ""        
-##   Carbonated Whiskey Sour           ""          ""           ""        
-##   Champs-Elysses                    "X"         ""           ""        
-##   Chartruth                         ""          ""           ""        
-##   Classic Daiquiri                  ""          ""           "X"       
-##   Clover Club                       "X"         ""           ""        
-##   Corpse Reviver #2                 "X"         "X"          ""        
-##   Cosmopolitan (Modern/Bastardized) ""          ""           "X"       
-##   Daiquiri with More Lime           ""          ""           "X"       
-##   De La Louisiane                   ""          ""           ""        
-##   Fresh Lime Gimlet                 ""          ""           "X"       
-##   Gin and Juice Agar                ""          ""           ""        
-##   Gin and Juice Centrifuge          ""          ""           ""        
-##   Gin and Tonic (Dry)               ""          ""           ""        
-##   Gold Rush                         "X"         ""           ""        
-##   Hanky Panky                       ""          ""           ""        
-##   Hemingway Daiquiri                ""          ""           "X"       
-##   Honeysuckle                       ""          ""           "X"       
-##   Improved Whiskey Cocktail         ""          ""           ""        
-##   Jack Rose                         "X"         ""           ""        
-##   Last Word                         ""          ""           "X"       
-##   Manhatan (Boubon, 45% abv)        ""          ""           ""        
-##   Manhatan (Rye, 50% abv)           ""          ""           ""        
-##   Margarita                         ""          ""           "X"       
-##   Martinez                          ""          ""           ""        
-##   Negroni                           ""          ""           ""        
-##   Old Fashioned                     ""          ""           ""        
-##   Old Pal                           ""          ""           ""        
-##   Pegu Club                         ""          ""           "X"       
-##   Pink Lady                         "X"         ""           ""        
-##   Pisco Sour                        ""          ""           "X"       
-##   Rob Roy                           ""          ""           ""        
-##   Rusty Nail                        ""          ""           ""        
-##   Sidecar                           "X"         ""           ""        
-##   Southside                         "X"         ""           ""        
-##   Vieux Carre                       ""          ""           ""        
-##   Whiskey Sour                      "X"         ""           ""        
-##   Widow's Kiss                      ""          ""           ""        
-##                                    
-##                                     luxardo maraschino luxardo marschino
-##   20th Century Cocktail             ""                 ""               
-##   Alexander                         ""                 ""               
-##   Aviation                          "X"                ""               
-##   Bee's Knees                       ""                 ""               
-##   Between the Sheets                ""                 ""               
-##   Bijou                             ""                 ""               
-##   Blackthorn                        ""                 ""               
-##   Blender Daiquiri                  ""                 ""               
-##   Blender Margarita                 ""                 ""               
-##   Blender Whiskey Sour              ""                 ""               
-##   Blinker                           ""                 ""               
-##   Blood and Sand                    ""                 ""               
-##   Bobby Burns                       ""                 ""               
-##   Brady Crusta                      "X"                ""               
-##   Brooklyn                          "X"                ""               
-##   Brown Derby                       ""                 ""               
-##   Carbonated Margarita              ""                 ""               
-##   Carbonated Negroni                ""                 ""               
-##   Carbonated Whiskey Sour           ""                 ""               
-##   Champs-Elysses                    ""                 ""               
-##   Chartruth                         ""                 ""               
-##   Classic Daiquiri                  ""                 ""               
-##   Clover Club                       ""                 ""               
-##   Corpse Reviver #2                 ""                 ""               
-##   Cosmopolitan (Modern/Bastardized) ""                 ""               
-##   Daiquiri with More Lime           ""                 ""               
-##   De La Louisiane                   ""                 ""               
-##   Fresh Lime Gimlet                 ""                 ""               
-##   Gin and Juice Agar                ""                 ""               
-##   Gin and Juice Centrifuge          ""                 ""               
-##   Gin and Tonic (Dry)               ""                 ""               
-##   Gold Rush                         ""                 ""               
-##   Hanky Panky                       ""                 ""               
-##   Hemingway Daiquiri                "X"                ""               
-##   Honeysuckle                       ""                 ""               
-##   Improved Whiskey Cocktail         "X"                ""               
-##   Jack Rose                         ""                 ""               
-##   Last Word                         ""                 "X"              
-##   Manhatan (Boubon, 45% abv)        ""                 ""               
-##   Manhatan (Rye, 50% abv)           ""                 ""               
-##   Margarita                         ""                 ""               
-##   Martinez                          "X"                ""               
-##   Negroni                           ""                 ""               
-##   Old Fashioned                     ""                 ""               
-##   Old Pal                           ""                 ""               
-##   Pegu Club                         ""                 ""               
-##   Pink Lady                         ""                 ""               
-##   Pisco Sour                        ""                 ""               
-##   Rob Roy                           ""                 ""               
-##   Rusty Nail                        ""                 ""               
-##   Sidecar                           ""                 ""               
-##   Southside                         ""                 ""               
-##   Vieux Carre                       ""                 ""               
-##   Whiskey Sour                      ""                 ""               
-##   Widow's Kiss                      ""                 ""               
-##                                    
-##                                     old tom gin orange bitters orange juice
-##   20th Century Cocktail             ""          ""             ""          
-##   Alexander                         ""          ""             ""          
-##   Aviation                          ""          ""             ""          
-##   Bee's Knees                       ""          ""             ""          
-##   Between the Sheets                ""          ""             ""          
-##   Bijou                             ""          "X"            ""          
-##   Blackthorn                        ""          "X"            ""          
-##   Blender Daiquiri                  ""          ""             ""          
-##   Blender Margarita                 ""          ""             ""          
-##   Blender Whiskey Sour              ""          ""             "X"         
-##   Blinker                           ""          ""             ""          
-##   Blood and Sand                    ""          ""             "X"         
-##   Bobby Burns                       ""          ""             ""          
-##   Brady Crusta                      ""          ""             ""          
-##   Brooklyn                          ""          ""             ""          
-##   Brown Derby                       ""          ""             ""          
-##   Carbonated Margarita              ""          ""             ""          
-##   Carbonated Negroni                ""          ""             ""          
-##   Carbonated Whiskey Sour           ""          ""             ""          
-##   Champs-Elysses                    ""          ""             ""          
-##   Chartruth                         ""          ""             ""          
-##   Classic Daiquiri                  ""          ""             ""          
-##   Clover Club                       ""          ""             ""          
-##   Corpse Reviver #2                 ""          ""             ""          
-##   Cosmopolitan (Modern/Bastardized) ""          ""             ""          
-##   Daiquiri with More Lime           ""          ""             ""          
-##   De La Louisiane                   ""          ""             ""          
-##   Fresh Lime Gimlet                 ""          ""             ""          
-##   Gin and Juice Agar                ""          ""             ""          
-##   Gin and Juice Centrifuge          ""          ""             ""          
-##   Gin and Tonic (Dry)               ""          ""             ""          
-##   Gold Rush                         ""          ""             ""          
-##   Hanky Panky                       ""          ""             ""          
-##   Hemingway Daiquiri                ""          ""             ""          
-##   Honeysuckle                       ""          ""             ""          
-##   Improved Whiskey Cocktail         ""          ""             ""          
-##   Jack Rose                         ""          ""             ""          
-##   Last Word                         ""          ""             ""          
-##   Manhatan (Boubon, 45% abv)        ""          ""             ""          
-##   Manhatan (Rye, 50% abv)           ""          ""             ""          
-##   Margarita                         ""          ""             ""          
-##   Martinez                          "X"         "X"            ""          
-##   Negroni                           ""          ""             ""          
-##   Old Fashioned                     ""          ""             ""          
-##   Old Pal                           ""          ""             ""          
-##   Pegu Club                         ""          "X"            ""          
-##   Pink Lady                         ""          ""             ""          
-##   Pisco Sour                        ""          ""             ""          
-##   Rob Roy                           ""          ""             ""          
-##   Rusty Nail                        ""          ""             ""          
-##   Sidecar                           ""          ""             ""          
-##   Southside                         ""          ""             ""          
-##   Vieux Carre                       ""          ""             ""          
-##   Whiskey Sour                      ""          ""             ""          
-##   Widow's Kiss                      ""          ""             ""          
-##                                    
-##                                     peychauds bitters pisco plymouth gin
-##   20th Century Cocktail             ""                ""    ""          
-##   Alexander                         ""                ""    ""          
-##   Aviation                          ""                ""    "X"         
-##   Bee's Knees                       ""                ""    ""          
-##   Between the Sheets                ""                ""    ""          
-##   Bijou                             ""                ""    ""          
-##   Blackthorn                        ""                ""    "X"         
-##   Blender Daiquiri                  ""                ""    ""          
-##   Blender Margarita                 ""                ""    ""          
-##   Blender Whiskey Sour              ""                ""    ""          
-##   Blinker                           ""                ""    ""          
-##   Blood and Sand                    ""                ""    ""          
-##   Bobby Burns                       ""                ""    ""          
-##   Brady Crusta                      ""                ""    ""          
-##   Brooklyn                          ""                ""    ""          
-##   Brown Derby                       ""                ""    ""          
-##   Carbonated Margarita              ""                ""    ""          
-##   Carbonated Negroni                ""                ""    ""          
-##   Carbonated Whiskey Sour           ""                ""    ""          
-##   Champs-Elysses                    ""                ""    ""          
-##   Chartruth                         ""                ""    ""          
-##   Classic Daiquiri                  ""                ""    ""          
-##   Clover Club                       ""                ""    "X"         
-##   Corpse Reviver #2                 ""                ""    ""          
-##   Cosmopolitan (Modern/Bastardized) ""                ""    ""          
-##   Daiquiri with More Lime           ""                ""    ""          
-##   De La Louisiane                   "X"               ""    ""          
-##   Fresh Lime Gimlet                 ""                ""    ""          
-##   Gin and Juice Agar                ""                ""    ""          
-##   Gin and Juice Centrifuge          ""                ""    ""          
-##   Gin and Tonic (Dry)               ""                ""    ""          
-##   Gold Rush                         ""                ""    ""          
-##   Hanky Panky                       ""                ""    ""          
-##   Hemingway Daiquiri                ""                ""    ""          
-##   Honeysuckle                       ""                ""    ""          
-##   Improved Whiskey Cocktail         ""                ""    ""          
-##   Jack Rose                         ""                ""    ""          
-##   Last Word                         ""                ""    "X"         
-##   Manhatan (Boubon, 45% abv)        ""                ""    ""          
-##   Manhatan (Rye, 50% abv)           ""                ""    ""          
-##   Margarita                         ""                ""    ""          
-##   Martinez                          ""                ""    ""          
-##   Negroni                           ""                ""    ""          
-##   Old Fashioned                     ""                ""    ""          
-##   Old Pal                           ""                ""    ""          
-##   Pegu Club                         ""                ""    ""          
-##   Pink Lady                         ""                ""    "X"         
-##   Pisco Sour                        ""                "X"   ""          
-##   Rob Roy                           ""                ""    ""          
-##   Rusty Nail                        ""                ""    ""          
-##   Sidecar                           ""                ""    ""          
-##   Southside                         ""                ""    ""          
-##   Vieux Carre                       "X"               ""    ""          
-##   Whiskey Sour                      ""                ""    ""          
-##   Widow's Kiss                      ""                ""    ""          
-##                                    
-##                                     quinine simple syrup raspberry syrup rye
-##   20th Century Cocktail             ""                   ""              "" 
-##   Alexander                         ""                   ""              "" 
-##   Aviation                          ""                   ""              "" 
-##   Bee's Knees                       ""                   ""              "" 
-##   Between the Sheets                ""                   ""              "" 
-##   Bijou                             ""                   ""              "" 
-##   Blackthorn                        ""                   ""              "" 
-##   Blender Daiquiri                  ""                   ""              "" 
-##   Blender Margarita                 ""                   ""              "" 
-##   Blender Whiskey Sour              ""                   ""              "" 
-##   Blinker                           ""                   "X"             "X"
-##   Blood and Sand                    ""                   ""              "" 
-##   Bobby Burns                       ""                   ""              "" 
-##   Brady Crusta                      ""                   ""              "" 
-##   Brooklyn                          ""                   ""              "X"
-##   Brown Derby                       ""                   ""              "" 
-##   Carbonated Margarita              ""                   ""              "" 
-##   Carbonated Negroni                ""                   ""              "" 
-##   Carbonated Whiskey Sour           ""                   ""              "" 
-##   Champs-Elysses                    ""                   ""              "" 
-##   Chartruth                         ""                   ""              "" 
-##   Classic Daiquiri                  ""                   ""              "" 
-##   Clover Club                       ""                   "X"             "" 
-##   Corpse Reviver #2                 ""                   ""              "" 
-##   Cosmopolitan (Modern/Bastardized) ""                   ""              "" 
-##   Daiquiri with More Lime           ""                   ""              "" 
-##   De La Louisiane                   ""                   ""              "X"
-##   Fresh Lime Gimlet                 ""                   ""              "" 
-##   Gin and Juice Agar                ""                   ""              "" 
-##   Gin and Juice Centrifuge          ""                   ""              "" 
-##   Gin and Tonic (Dry)               "X"                  ""              "" 
-##   Gold Rush                         ""                   ""              "" 
-##   Hanky Panky                       ""                   ""              "" 
-##   Hemingway Daiquiri                ""                   ""              "" 
-##   Honeysuckle                       ""                   ""              "" 
-##   Improved Whiskey Cocktail         ""                   ""              "X"
-##   Jack Rose                         ""                   ""              "" 
-##   Last Word                         ""                   ""              "" 
-##   Manhatan (Boubon, 45% abv)        ""                   ""              "" 
-##   Manhatan (Rye, 50% abv)           ""                   ""              "X"
-##   Margarita                         ""                   ""              "" 
-##   Martinez                          ""                   ""              "" 
-##   Negroni                           ""                   ""              "" 
-##   Old Fashioned                     ""                   ""              "" 
-##   Old Pal                           ""                   ""              "X"
-##   Pegu Club                         ""                   ""              "" 
-##   Pink Lady                         ""                   ""              "" 
-##   Pisco Sour                        ""                   ""              "" 
-##   Rob Roy                           ""                   ""              "" 
-##   Rusty Nail                        ""                   ""              "" 
-##   Sidecar                           ""                   ""              "" 
-##   Southside                         ""                   ""              "" 
-##   Vieux Carre                       ""                   ""              "X"
-##   Whiskey Sour                      ""                   ""              "X"
-##   Widow's Kiss                      ""                   ""              "" 
-##                                    
-##                                     saline saline solution scotch simple
-##   20th Century Cocktail             ""     ""              ""     ""    
-##   Alexander                         ""     ""              ""     ""    
-##   Aviation                          ""     ""              ""     ""    
-##   Bee's Knees                       ""     ""              ""     ""    
-##   Between the Sheets                ""     ""              ""     ""    
-##   Bijou                             ""     ""              ""     ""    
-##   Blackthorn                        ""     ""              ""     ""    
-##   Blender Daiquiri                  ""     "X"             ""     ""    
-##   Blender Margarita                 ""     ""              ""     ""    
-##   Blender Whiskey Sour              ""     "X"             ""     ""    
-##   Blinker                           ""     ""              ""     ""    
-##   Blood and Sand                    ""     ""              "X"    ""    
-##   Bobby Burns                       ""     ""              "X"    ""    
-##   Brady Crusta                      ""     ""              ""     ""    
-##   Brooklyn                          ""     ""              ""     ""    
-##   Brown Derby                       ""     ""              ""     ""    
-##   Carbonated Margarita              ""     "X"             ""     ""    
-##   Carbonated Negroni                ""     "X"             ""     ""    
-##   Carbonated Whiskey Sour           ""     "X"             ""     ""    
-##   Champs-Elysses                    ""     ""              ""     ""    
-##   Chartruth                         ""     ""              ""     ""    
-##   Classic Daiquiri                  ""     ""              ""     ""    
-##   Clover Club                       ""     ""              ""     ""    
-##   Corpse Reviver #2                 ""     ""              ""     ""    
-##   Cosmopolitan (Modern/Bastardized) ""     ""              ""     ""    
-##   Daiquiri with More Lime           ""     ""              ""     ""    
-##   De La Louisiane                   ""     ""              ""     ""    
-##   Fresh Lime Gimlet                 ""     ""              ""     ""    
-##   Gin and Juice Agar                ""     "X"             ""     ""    
-##   Gin and Juice Centrifuge          ""     ""              ""     "X"   
-##   Gin and Tonic (Dry)               ""     "X"             ""     ""    
-##   Gold Rush                         ""     ""              ""     ""    
-##   Hanky Panky                       ""     ""              ""     ""    
-##   Hemingway Daiquiri                ""     "X"             ""     ""    
-##   Honeysuckle                       ""     ""              ""     ""    
-##   Improved Whiskey Cocktail         ""     ""              ""     ""    
-##   Jack Rose                         ""     ""              ""     ""    
-##   Last Word                         "X"    ""              ""     ""    
-##   Manhatan (Boubon, 45% abv)        ""     ""              ""     ""    
-##   Manhatan (Rye, 50% abv)           ""     ""              ""     ""    
-##   Margarita                         ""     "X"             ""     ""    
-##   Martinez                          ""     ""              ""     ""    
-##   Negroni                           ""     ""              ""     ""    
-##   Old Fashioned                     ""     ""              ""     ""    
-##   Old Pal                           ""     ""              ""     ""    
-##   Pegu Club                         ""     ""              ""     ""    
-##   Pink Lady                         ""     ""              ""     ""    
-##   Pisco Sour                        ""     ""              ""     ""    
-##   Rob Roy                           ""     ""              "X"    ""    
-##   Rusty Nail                        ""     ""              "X"    ""    
-##   Sidecar                           ""     ""              ""     ""    
-##   Southside                         ""     ""              ""     ""    
-##   Vieux Carre                       ""     ""              ""     ""    
-##   Whiskey Sour                      ""     "X"             ""     ""    
-##   Widow's Kiss                      ""     ""              ""     ""    
-##                                    
-##                                     simple syrup sloe gin sugard proof rum
-##   20th Century Cocktail             ""           ""       ""              
-##   Alexander                         ""           ""       ""              
-##   Aviation                          ""           ""       ""              
-##   Bee's Knees                       ""           ""       ""              
-##   Between the Sheets                ""           ""       ""              
-##   Bijou                             ""           ""       ""              
-##   Blackthorn                        ""           "X"      ""              
-##   Blender Daiquiri                  ""           ""       "X"             
-##   Blender Margarita                 ""           ""       ""              
-##   Blender Whiskey Sour              ""           ""       ""              
-##   Blinker                           ""           ""       ""              
-##   Blood and Sand                    ""           ""       ""              
-##   Bobby Burns                       ""           ""       ""              
-##   Brady Crusta                      ""           ""       ""              
-##   Brooklyn                          ""           ""       ""              
-##   Brown Derby                       ""           ""       ""              
-##   Carbonated Margarita              "X"          ""       ""              
-##   Carbonated Negroni                ""           ""       ""              
-##   Carbonated Whiskey Sour           "X"          ""       ""              
-##   Champs-Elysses                    "X"          ""       ""              
-##   Chartruth                         ""           ""       ""              
-##   Classic Daiquiri                  "X"          ""       ""              
-##   Clover Club                       ""           ""       ""              
-##   Corpse Reviver #2                 ""           ""       ""              
-##   Cosmopolitan (Modern/Bastardized) ""           ""       ""              
-##   Daiquiri with More Lime           "X"          ""       ""              
-##   De La Louisiane                   ""           ""       ""              
-##   Fresh Lime Gimlet                 "X"          ""       ""              
-##   Gin and Juice Agar                ""           ""       ""              
-##   Gin and Juice Centrifuge          ""           ""       ""              
-##   Gin and Tonic (Dry)               ""           ""       ""              
-##   Gold Rush                         ""           ""       ""              
-##   Hanky Panky                       ""           ""       ""              
-##   Hemingway Daiquiri                ""           ""       ""              
-##   Honeysuckle                       ""           ""       ""              
-##   Improved Whiskey Cocktail         "X"          ""       ""              
-##   Jack Rose                         ""           ""       ""              
-##   Last Word                         ""           ""       ""              
-##   Manhatan (Boubon, 45% abv)        ""           ""       ""              
-##   Manhatan (Rye, 50% abv)           ""           ""       ""              
-##   Margarita                         "X"          ""       ""              
-##   Martinez                          ""           ""       ""              
-##   Negroni                           ""           ""       ""              
-##   Old Fashioned                     "X"          ""       ""              
-##   Old Pal                           ""           ""       ""              
-##   Pegu Club                         ""           ""       ""              
-##   Pink Lady                         "X"          ""       ""              
-##   Pisco Sour                        "X"          ""       ""              
-##   Rob Roy                           ""           ""       ""              
-##   Rusty Nail                        ""           ""       ""              
-##   Sidecar                           "X"          ""       ""              
-##   Southside                         "X"          ""       ""              
-##   Vieux Carre                       ""           ""       ""              
-##   Whiskey Sour                      "X"          ""       ""              
-##   Widow's Kiss                      ""           ""       ""              
-##                                    
-##                                     sugared proof rye sweet vermouth water
-##   20th Century Cocktail             ""                ""             ""   
-##   Alexander                         ""                ""             ""   
-##   Aviation                          ""                ""             ""   
-##   Bee's Knees                       ""                ""             ""   
-##   Between the Sheets                ""                ""             ""   
-##   Bijou                             ""                "X"            ""   
-##   Blackthorn                        ""                "X"            ""   
-##   Blender Daiquiri                  ""                ""             "X"  
-##   Blender Margarita                 ""                ""             "X"  
-##   Blender Whiskey Sour              "X"               ""             "X"  
-##   Blinker                           ""                ""             ""   
-##   Blood and Sand                    ""                "X"            ""   
-##   Bobby Burns                       ""                "X"            ""   
-##   Brady Crusta                      ""                ""             ""   
-##   Brooklyn                          ""                ""             ""   
-##   Brown Derby                       ""                ""             ""   
-##   Carbonated Margarita              ""                ""             "X"  
-##   Carbonated Negroni                ""                "X"            "X"  
-##   Carbonated Whiskey Sour           ""                ""             "X"  
-##   Champs-Elysses                    ""                ""             ""   
-##   Chartruth                         ""                ""             "X"  
-##   Classic Daiquiri                  ""                ""             ""   
-##   Clover Club                       ""                ""             ""   
-##   Corpse Reviver #2                 ""                ""             ""   
-##   Cosmopolitan (Modern/Bastardized) ""                ""             ""   
-##   Daiquiri with More Lime           ""                ""             ""   
-##   De La Louisiane                   ""                "X"            ""   
-##   Fresh Lime Gimlet                 ""                ""             ""   
-##   Gin and Juice Agar                ""                ""             "X"  
-##   Gin and Juice Centrifuge          ""                ""             "X"  
-##   Gin and Tonic (Dry)               ""                ""             "X"  
-##   Gold Rush                         ""                ""             ""   
-##   Hanky Panky                       ""                "X"            ""   
-##   Hemingway Daiquiri                ""                ""             ""   
-##   Honeysuckle                       ""                ""             ""   
-##   Improved Whiskey Cocktail         ""                ""             ""   
-##   Jack Rose                         ""                ""             ""   
-##   Last Word                         ""                ""             ""   
-##   Manhatan (Boubon, 45% abv)        ""                "X"            ""   
-##   Manhatan (Rye, 50% abv)           ""                "X"            ""   
-##   Margarita                         ""                ""             ""   
-##   Martinez                          ""                "X"            ""   
-##   Negroni                           ""                "X"            ""   
-##   Old Fashioned                     ""                ""             ""   
-##   Old Pal                           ""                ""             ""   
-##   Pegu Club                         ""                ""             ""   
-##   Pink Lady                         ""                ""             ""   
-##   Pisco Sour                        ""                ""             ""   
-##   Rob Roy                           ""                "X"            ""   
-##   Rusty Nail                        ""                ""             ""   
-##   Sidecar                           ""                ""             ""   
-##   Southside                         ""                ""             ""   
-##   Vieux Carre                       ""                "X"            ""   
-##   Whiskey Sour                      ""                ""             ""   
-##   Widow's Kiss                      ""                ""             ""   
-##                                    
-##                                     white crme de cacao white mezcal white rum
-##   20th Century Cocktail             "X"                 ""           ""       
-##   Alexander                         ""                  ""           ""       
-##   Aviation                          ""                  ""           ""       
-##   Bee's Knees                       ""                  ""           ""       
-##   Between the Sheets                ""                  ""           "X"      
-##   Bijou                             ""                  ""           ""       
-##   Blackthorn                        ""                  ""           ""       
-##   Blender Daiquiri                  ""                  ""           ""       
-##   Blender Margarita                 ""                  "X"          ""       
-##   Blender Whiskey Sour              ""                  ""           ""       
-##   Blinker                           ""                  ""           ""       
-##   Blood and Sand                    ""                  ""           ""       
-##   Bobby Burns                       ""                  ""           ""       
-##   Brady Crusta                      ""                  ""           ""       
-##   Brooklyn                          ""                  ""           ""       
-##   Brown Derby                       ""                  ""           ""       
-##   Carbonated Margarita              ""                  ""           ""       
-##   Carbonated Negroni                ""                  ""           ""       
-##   Carbonated Whiskey Sour           ""                  ""           ""       
-##   Champs-Elysses                    ""                  ""           ""       
-##   Chartruth                         ""                  ""           ""       
-##   Classic Daiquiri                  ""                  ""           "X"      
-##   Clover Club                       ""                  ""           ""       
-##   Corpse Reviver #2                 ""                  ""           ""       
-##   Cosmopolitan (Modern/Bastardized) ""                  ""           ""       
-##   Daiquiri with More Lime           ""                  ""           "X"      
-##   De La Louisiane                   ""                  ""           ""       
-##   Fresh Lime Gimlet                 ""                  ""           ""       
-##   Gin and Juice Agar                ""                  ""           ""       
-##   Gin and Juice Centrifuge          ""                  ""           ""       
-##   Gin and Tonic (Dry)               ""                  ""           ""       
-##   Gold Rush                         ""                  ""           ""       
-##   Hanky Panky                       ""                  ""           ""       
-##   Hemingway Daiquiri                ""                  ""           "X"      
-##   Honeysuckle                       ""                  ""           "X"      
-##   Improved Whiskey Cocktail         ""                  ""           ""       
-##   Jack Rose                         ""                  ""           ""       
-##   Last Word                         ""                  ""           ""       
-##   Manhatan (Boubon, 45% abv)        ""                  ""           ""       
-##   Manhatan (Rye, 50% abv)           ""                  ""           ""       
-##   Margarita                         ""                  ""           ""       
-##   Martinez                          ""                  ""           ""       
-##   Negroni                           ""                  ""           ""       
-##   Old Fashioned                     ""                  ""           ""       
-##   Old Pal                           ""                  ""           ""       
-##   Pegu Club                         ""                  ""           ""       
-##   Pink Lady                         ""                  ""           ""       
-##   Pisco Sour                        ""                  ""           ""       
-##   Rob Roy                           ""                  ""           ""       
-##   Rusty Nail                        ""                  ""           ""       
-##   Sidecar                           ""                  ""           ""       
-##   Southside                         ""                  ""           ""       
-##   Vieux Carre                       ""                  ""           ""       
-##   Whiskey Sour                      ""                  ""           ""       
-##   Widow's Kiss                      ""                  ""           ""       
-##                                    
-##                                     yellow chartreuse
-##   20th Century Cocktail             ""               
-##   Alexander                         ""               
-##   Aviation                          ""               
-##   Bee's Knees                       ""               
-##   Between the Sheets                ""               
-##   Bijou                             ""               
-##   Blackthorn                        ""               
-##   Blender Daiquiri                  ""               
-##   Blender Margarita                 "X"              
-##   Blender Whiskey Sour              ""               
-##   Blinker                           ""               
-##   Blood and Sand                    ""               
-##   Bobby Burns                       ""               
-##   Brady Crusta                      ""               
-##   Brooklyn                          ""               
-##   Brown Derby                       ""               
-##   Carbonated Margarita              ""               
-##   Carbonated Negroni                ""               
-##   Carbonated Whiskey Sour           ""               
-##   Champs-Elysses                    ""               
-##   Chartruth                         ""               
-##   Classic Daiquiri                  ""               
-##   Clover Club                       ""               
-##   Corpse Reviver #2                 ""               
-##   Cosmopolitan (Modern/Bastardized) ""               
-##   Daiquiri with More Lime           ""               
-##   De La Louisiane                   ""               
-##   Fresh Lime Gimlet                 ""               
-##   Gin and Juice Agar                ""               
-##   Gin and Juice Centrifuge          ""               
-##   Gin and Tonic (Dry)               ""               
-##   Gold Rush                         ""               
-##   Hanky Panky                       ""               
-##   Hemingway Daiquiri                ""               
-##   Honeysuckle                       ""               
-##   Improved Whiskey Cocktail         ""               
-##   Jack Rose                         ""               
-##   Last Word                         ""               
-##   Manhatan (Boubon, 45% abv)        ""               
-##   Manhatan (Rye, 50% abv)           ""               
-##   Margarita                         ""               
-##   Martinez                          ""               
-##   Negroni                           ""               
-##   Old Fashioned                     ""               
-##   Old Pal                           ""               
-##   Pegu Club                         ""               
-##   Pink Lady                         ""               
-##   Pisco Sour                        ""               
-##   Rob Roy                           ""               
-##   Rusty Nail                        ""               
-##   Sidecar                           ""               
-##   Southside                         ""               
-##   Vieux Carre                       ""               
-##   Whiskey Sour                      ""               
-##   Widow's Kiss                      "X"
+## Using ncotw as value column: use value.var to override.
+```
+
+```r
+cheatsheet[cheatsheet == 0] <- ""
+cheatsheet[cheatsheet == 1] <- "X"
+cheatsheet
+```
+
+```
+##                                 name absinthe absolut citron vodka
+## 1              20th Century Cocktail                              
+## 2                          Alexander                              
+## 3                           Aviation                              
+## 4                        Bee's Knees                              
+## 5                 Between the Sheets                              
+## 6                              Bijou                              
+## 7                         Blackthorn                              
+## 8                   Blender Daiquiri                              
+## 9                  Blender Margarita                              
+## 10              Blender Whiskey Sour                              
+## 11                           Blinker                              
+## 12                    Blood and Sand                              
+## 13                       Bobby Burns                              
+## 14                      Brady Crusta                              
+## 15                          Brooklyn                              
+## 16                       Brown Derby                              
+## 17              Carbonated Margarita                              
+## 18                Carbonated Negroni                              
+## 19           Carbonated Whiskey Sour                              
+## 20                    Champs-Elysses                              
+## 21                         Chartruth                              
+## 22                  Classic Daiquiri                              
+## 23                       Clover Club                              
+## 24                 Corpse Reviver #2                              
+## 25 Cosmopolitan (Modern/Bastardized)                             X
+## 26           Daiquiri with More Lime                              
+## 27                   De La Louisiane        X                     
+## 28                 Fresh Lime Gimlet                              
+## 29                Gin and Juice Agar                              
+## 30          Gin and Juice Centrifuge                              
+## 31               Gin and Tonic (Dry)                              
+## 32                         Gold Rush                              
+## 33                       Hanky Panky                              
+## 34                Hemingway Daiquiri                              
+## 35                       Honeysuckle                              
+## 36         Improved Whiskey Cocktail                              
+## 37                         Jack Rose                              
+## 38                         Last Word                              
+## 39        Manhatan (Boubon, 45% abv)                              
+## 40           Manhatan (Rye, 50% abv)                              
+## 41                         Margarita                              
+## 42                          Martinez                              
+## 43                           Negroni                              
+## 44                     Old Fashioned                              
+## 45                           Old Pal                              
+## 46                         Pegu Club                              
+## 47                         Pink Lady                              
+## 48                        Pisco Sour                              
+## 49                           Rob Roy                              
+## 50                        Rusty Nail                              
+## 51                           Sidecar                              
+## 52                         Southside                              
+## 53                       Vieux Carre                              
+## 54                      Whiskey Sour                              
+## 55                      Widow's Kiss                              
+##    agarclarified grapefruit juice amer picon angostura bitters apple brandy
+## 1                                                                          
+## 2                                                                          
+## 3                                                                          
+## 4                                                                          
+## 5                                                                          
+## 6                                                                          
+## 7                                                                          
+## 8                                                                          
+## 9                                                                          
+## 10                                                                         
+## 11                                                                         
+## 12                                                                         
+## 13                                                                         
+## 14                                                                         
+## 15                                         X                 X             
+## 16                                                                         
+## 17                                                                         
+## 18                                                                         
+## 19                                                                         
+## 20                                                           X             
+## 21                                                                         
+## 22                                                                         
+## 23                                                                         
+## 24                                                                         
+## 25                                                                         
+## 26                                                                         
+## 27                                                           X             
+## 28                                                                         
+## 29                              X                                          
+## 30                                                                         
+## 31                                                                         
+## 32                                                                         
+## 33                                                                         
+## 34                                                                         
+## 35                                                                         
+## 36                                                           X             
+## 37                                                           X            X
+## 38                                                                         
+## 39                                                           X             
+## 40                                                           X             
+## 41                                                                         
+## 42                                                           X             
+## 43                                                                         
+## 44                                                           X             
+## 45                                                                         
+## 46                                                           X             
+## 47                                                                         
+## 48                                                                         
+## 49                                                           X             
+## 50                                                                         
+## 51                                                                         
+## 52                                                                         
+## 53                                                           X             
+## 54                                                                         
+## 55                                                                        X
+##    benedictine blanco tequila bourbon campari
+## 1                                            
+## 2                                            
+## 3                                            
+## 4                                            
+## 5                                            
+## 6                                            
+## 7                                            
+## 8                                            
+## 9                                            
+## 10                                           
+## 11                                           
+## 12                                           
+## 13           X                               
+## 14                                           
+## 15                                           
+## 16                                  X        
+## 17                          X                
+## 18                                          X
+## 19                                  X        
+## 20                                           
+## 21                                           
+## 22                                           
+## 23                                           
+## 24                                           
+## 25                                           
+## 26                                           
+## 27           X                               
+## 28                                           
+## 29                                           
+## 30                                           
+## 31                                           
+## 32                                  X        
+## 33                                           
+## 34                                           
+## 35                                           
+## 36                                           
+## 37                                           
+## 38                                           
+## 39                                  X        
+## 40                                           
+## 41                          X                
+## 42                                           
+## 43                                          X
+## 44                                  X        
+## 45                                          X
+## 46                                           
+## 47                                           
+## 48                                           
+## 49                                           
+## 50                                           
+## 51                                           
+## 52                                           
+## 53           X                               
+## 54                                           
+## 55           X                               
+##    centrifugeclarified grapefruit juice champagne acid cherry herring
+## 1                                                                    
+## 2                                                                    
+## 3                                                                    
+## 4                                                                    
+## 5                                                                    
+## 6                                                                    
+## 7                                                                    
+## 8                                                                    
+## 9                                                                    
+## 10                                                                   
+## 11                                                                   
+## 12                                                                  X
+## 13                                                                   
+## 14                                                                   
+## 15                                                                   
+## 16                                                                   
+## 17                                                                   
+## 18                                                                   
+## 19                                                                   
+## 20                                                                   
+## 21                                                                   
+## 22                                                                   
+## 23                                                                   
+## 24                                                                   
+## 25                                                                   
+## 26                                                                   
+## 27                                                                   
+## 28                                                                   
+## 29                                                                   
+## 30                                    X              X               
+## 31                                                                   
+## 32                                                                   
+## 33                                                                   
+## 34                                                                   
+## 35                                                                   
+## 36                                                                   
+## 37                                                                   
+## 38                                                                   
+## 39                                                                   
+## 40                                                                   
+## 41                                                                   
+## 42                                                                   
+## 43                                                                   
+## 44                                                                   
+## 45                                                                   
+## 46                                                                   
+## 47                                                                   
+## 48                                                                   
+## 49                                                                   
+## 50                                                                   
+## 51                                                                   
+## 52                                                                   
+## 53                                                                   
+## 54                                                                   
+## 55                                                                   
+##    clarified lime juice clarified lime juice or champagne acid cognac cointreau
+## 1                                                                              
+## 2                                                                   X          
+## 3                                                                              
+## 4                                                                              
+## 5                                                                   X          
+## 6                                                                              
+## 7                                                                              
+## 8                                                                              
+## 9                                                                             X
+## 10                                                                             
+## 11                                                                             
+## 12                                                                             
+## 13                                                                             
+## 14                                                                  X          
+## 15                                                                             
+## 16                                                                             
+## 17                    X                                                        
+## 18                                                           X                 
+## 19                    X                                                        
+## 20                                                                  X          
+## 21                    X                                                        
+## 22                                                                             
+## 23                                                                             
+## 24                                                                            X
+## 25                                                                            X
+## 26                                                                             
+## 27                                                                             
+## 28                                                                             
+## 29                                                                             
+## 30                                                                             
+## 31                    X                                                        
+## 32                                                                             
+## 33                                                                             
+## 34                                                                             
+## 35                                                                             
+## 36                                                                             
+## 37                                                                             
+## 38                                                                             
+## 39                                                                             
+## 40                                                                             
+## 41                                                                            X
+## 42                                                                             
+## 43                                                                             
+## 44                                                                             
+## 45                                                                             
+## 46                                                                             
+## 47                                                                             
+## 48                                                                             
+## 49                                                                             
+## 50                                                                             
+## 51                                                                  X         X
+## 52                                                                             
+## 53                                                                  X          
+## 54                                                                             
+## 55                                                                             
+##    cranberry juice crem de violette curacao demerara syrup dolin dry vermouth
+## 1                                                                            
+## 2                                                        X                   
+## 3                                 X                                          
+## 4                                                                            
+## 5                                         X                                  
+## 6                                                                            
+## 7                                                                            
+## 8                                                                            
+## 9                                                                            
+## 10                                                                           
+## 11                                                                           
+## 12                                                                           
+## 13                                                                           
+## 14                                        X                                  
+## 15                                                                           
+## 16                                                                           
+## 17                                                                           
+## 18                                                                           
+## 19                                                                           
+## 20                                                                           
+## 21                                                                           
+## 22                                                                           
+## 23                                                                          X
+## 24                                                                           
+## 25               X                                                           
+## 26                                                                           
+## 27                                                                           
+## 28                                                                           
+## 29                                                                           
+## 30                                                                           
+## 31                                                                           
+## 32                                                                           
+## 33                                                                           
+## 34                                                                           
+## 35                                                                           
+## 36                                                                           
+## 37                                                                           
+## 38                                                                           
+## 39                                                                           
+## 40                                                                           
+## 41                                                                           
+## 42                                                                           
+## 43                                                                           
+## 44                                                                           
+## 45                                                                           
+## 46                                        X                                  
+## 47                                                                           
+## 48                                                                           
+## 49                                                                           
+## 50                                                                           
+## 51                                                                           
+## 52                                                                           
+## 53                                                                           
+## 54                                                                           
+## 55                                                                           
+##    drambuie dry vermouth egg white fernet branca gin gin  grapefruit juice
+## 1                                                  X                      
+## 2                                                                         
+## 3                                                                         
+## 4                                                  X                      
+## 5                                                                         
+## 6                                                  X                      
+## 7                                                                         
+## 8                                                                         
+## 9                                                                         
+## 10                                                                        
+## 11                                                                       X
+## 12                                                                        
+## 13                                                                        
+## 14                                                                        
+## 15                     X                                                  
+## 16                                                                       X
+## 17                                                                        
+## 18                                                      X                 
+## 19                                                                        
+## 20                                                                        
+## 21                                                                        
+## 22                                                                        
+## 23                               2                                        
+## 24                                                 X                      
+## 25                                                                        
+## 26                                                                        
+## 27                                                                        
+## 28                                                 X                      
+## 29                                                 X                      
+## 30                                                 X                      
+## 31                                                 X                      
+## 32                                                                        
+## 33                                             X   X                      
+## 34                                                                       X
+## 35                                                                        
+## 36                                                                        
+## 37                                                                        
+## 38                                                                        
+## 39                                                                        
+## 40                                                                        
+## 41                                                                        
+## 42                                                                        
+## 43                                                 X                      
+## 44                                                                        
+## 45                     X                                                  
+## 46                                                 X                      
+## 47                               X                                        
+## 48                               X                                        
+## 49                                                                        
+## 50        X                                                               
+## 51                                                                        
+## 52                                                 X                      
+## 53                                                                        
+## 54                               X                                        
+## 55                                                                        
+##    green chartreuse grenadine heavy cream hellfire bitters honey syrup
+## 1                                                                     
+## 2                                       X                             
+## 3                                                                     
+## 4                                                                    X
+## 5                                                                     
+## 6                 X                                                   
+## 7                                                                     
+## 8                                                                     
+## 9                                                        X            
+## 10                                                                    
+## 11                                                                    
+## 12                                                                    
+## 13                                                                    
+## 14                                                                    
+## 15                                                                    
+## 16                                                                   X
+## 17                                                                    
+## 18                                                                    
+## 19                                                                    
+## 20                X                                                   
+## 21                X                                                   
+## 22                                                                    
+## 23                                                                    
+## 24                                                                    
+## 25                                                                    
+## 26                                                                    
+## 27                                                                    
+## 28                                                                    
+## 29                                                                    
+## 30                                                                    
+## 31                                                                    
+## 32                                                                   X
+## 33                                                                    
+## 34                                                                    
+## 35                                                                   X
+## 36                                                                    
+## 37                          X                                         
+## 38                X                                                   
+## 39                                                                    
+## 40                                                                    
+## 41                                                                    
+## 42                                                                    
+## 43                                                                    
+## 44                                                                    
+## 45                                                                    
+## 46                                                                    
+## 47                          X                                         
+## 48                                                                    
+## 49                                                                    
+## 50                                                                    
+## 51                                                                    
+## 52                                                                    
+## 53                                                                    
+## 54                                                                    
+## 55                                                                    
+##    lairds applejack bottled in bond lemon juice lillet blanc lime juice
+## 1                                             X            X           
+## 2                                                                      
+## 3                                             X                        
+## 4                                             X                        
+## 5                                             X                        
+## 6                                                                      
+## 7                                                                      
+## 8                                                                     X
+## 9                                                                     X
+## 10                                            X                        
+## 11                                                                     
+## 12                                                                     
+## 13                                                                     
+## 14                                            X                        
+## 15                                                                     
+## 16                                                                     
+## 17                                                                     
+## 18                                                                     
+## 19                                                                     
+## 20                                            X                        
+## 21                                                                     
+## 22                                                                    X
+## 23                                            X                        
+## 24                                            X            X           
+## 25                                                                    X
+## 26                                                                    X
+## 27                                                                     
+## 28                                                                    X
+## 29                                                                     
+## 30                                                                     
+## 31                                                                     
+## 32                                            X                        
+## 33                                                                     
+## 34                                                                    X
+## 35                                                                    X
+## 36                                                                     
+## 37                                            X                        
+## 38                                                                    X
+## 39                                                                     
+## 40                                                                     
+## 41                                                                    X
+## 42                                                                     
+## 43                                                                     
+## 44                                                                     
+## 45                                                                     
+## 46                                                                    X
+## 47                                X           X                        
+## 48                                                                    X
+## 49                                                                     
+## 50                                                                     
+## 51                                            X                        
+## 52                                            X                        
+## 53                                                                     
+## 54                                            X                        
+## 55                                                                     
+##    luxardo maraschino luxardo marschino old tom gin orange bitters orange juice
+## 1                                                                              
+## 2                                                                              
+## 3                   X                                                          
+## 4                                                                              
+## 5                                                                              
+## 6                                                                X             
+## 7                                                                X             
+## 8                                                                              
+## 9                                                                              
+## 10                                                                            X
+## 11                                                                             
+## 12                                                                            X
+## 13                                                                             
+## 14                  X                                                          
+## 15                  X                                                          
+## 16                                                                             
+## 17                                                                             
+## 18                                                                             
+## 19                                                                             
+## 20                                                                             
+## 21                                                                             
+## 22                                                                             
+## 23                                                                             
+## 24                                                                             
+## 25                                                                             
+## 26                                                                             
+## 27                                                                             
+## 28                                                                             
+## 29                                                                             
+## 30                                                                             
+## 31                                                                             
+## 32                                                                             
+## 33                                                                             
+## 34                  X                                                          
+## 35                                                                             
+## 36                  X                                                          
+## 37                                                                             
+## 38                                    X                                        
+## 39                                                                             
+## 40                                                                             
+## 41                                                                             
+## 42                  X                             X              X             
+## 43                                                                             
+## 44                                                                             
+## 45                                                                             
+## 46                                                               X             
+## 47                                                                             
+## 48                                                                             
+## 49                                                                             
+## 50                                                                             
+## 51                                                                             
+## 52                                                                             
+## 53                                                                             
+## 54                                                                             
+## 55                                                                             
+##    peychauds bitters pisco plymouth gin quinine simple syrup raspberry syrup
+## 1                                                                           
+## 2                                                                           
+## 3                                     X                                     
+## 4                                                                           
+## 5                                                                           
+## 6                                                                           
+## 7                                     X                                     
+## 8                                                                           
+## 9                                                                           
+## 10                                                                          
+## 11                                                                         X
+## 12                                                                          
+## 13                                                                          
+## 14                                                                          
+## 15                                                                          
+## 16                                                                          
+## 17                                                                          
+## 18                                                                          
+## 19                                                                          
+## 20                                                                          
+## 21                                                                          
+## 22                                                                          
+## 23                                    X                                    X
+## 24                                                                          
+## 25                                                                          
+## 26                                                                          
+## 27                 X                                                        
+## 28                                                                          
+## 29                                                                          
+## 30                                                                          
+## 31                                                         X                
+## 32                                                                          
+## 33                                                                          
+## 34                                                                          
+## 35                                                                          
+## 36                                                                          
+## 37                                                                          
+## 38                                    X                                     
+## 39                                                                          
+## 40                                                                          
+## 41                                                                          
+## 42                                                                          
+## 43                                                                          
+## 44                                                                          
+## 45                                                                          
+## 46                                                                          
+## 47                                    X                                     
+## 48                       X                                                  
+## 49                                                                          
+## 50                                                                          
+## 51                                                                          
+## 52                                                                          
+## 53                 X                                                        
+## 54                                                                          
+## 55                                                                          
+##    rye saline saline solution scotch simple simple syrup sloe gin
+## 1                                                                
+## 2                                                                
+## 3                                                                
+## 4                                                                
+## 5                                                                
+## 6                                                                
+## 7                                                               X
+## 8                           X                                    
+## 9                                                                
+## 10                          X                                    
+## 11   X                                                           
+## 12                                 X                             
+## 13                                 X                             
+## 14                                                               
+## 15   X                                                           
+## 16                                                               
+## 17                          X                          X         
+## 18                          X                                    
+## 19                          X                          X         
+## 20                                                     X         
+## 21                                                               
+## 22                                                     X         
+## 23                                                               
+## 24                                                               
+## 25                                                               
+## 26                                                     X         
+## 27   X                                                           
+## 28                                                     X         
+## 29                          X                                    
+## 30                                        X                      
+## 31                          X                                    
+## 32                                                               
+## 33                                                               
+## 34                          X                                    
+## 35                                                               
+## 36   X                                                 X         
+## 37                                                               
+## 38          X                                                    
+## 39                                                               
+## 40   X                                                           
+## 41                          X                          X         
+## 42                                                               
+## 43                                                               
+## 44                                                     X         
+## 45   X                                                           
+## 46                                                               
+## 47                                                     X         
+## 48                                                     X         
+## 49                                 X                             
+## 50                                 X                             
+## 51                                                     X         
+## 52                                                     X         
+## 53   X                                                           
+## 54   X                      X                          X         
+## 55                                                               
+##    sugard proof rum sugared proof rye sweet vermouth water white crme de cacao
+## 1                                                                            X
+## 2                                                                             
+## 3                                                                             
+## 4                                                                             
+## 5                                                                             
+## 6                                                  X                          
+## 7                                                  X                          
+## 8                 X                                      X                    
+## 9                                                        X                    
+## 10                                  X                    X                    
+## 11                                                                            
+## 12                                                 X                          
+## 13                                                 X                          
+## 14                                                                            
+## 15                                                                            
+## 16                                                                            
+## 17                                                       X                    
+## 18                                                 X     X                    
+## 19                                                       X                    
+## 20                                                                            
+## 21                                                       X                    
+## 22                                                                            
+## 23                                                                            
+## 24                                                                            
+## 25                                                                            
+## 26                                                                            
+## 27                                                 X                          
+## 28                                                                            
+## 29                                                       X                    
+## 30                                                       X                    
+## 31                                                       X                    
+## 32                                                                            
+## 33                                                 X                          
+## 34                                                                            
+## 35                                                                            
+## 36                                                                            
+## 37                                                                            
+## 38                                                                            
+## 39                                                 X                          
+## 40                                                 X                          
+## 41                                                                            
+## 42                                                 X                          
+## 43                                                 X                          
+## 44                                                                            
+## 45                                                                            
+## 46                                                                            
+## 47                                                                            
+## 48                                                                            
+## 49                                                 X                          
+## 50                                                                            
+## 51                                                                            
+## 52                                                                            
+## 53                                                 X                          
+## 54                                                                            
+## 55                                                                            
+##    white mezcal white rum yellow chartreuse
+## 1                                          
+## 2                                          
+## 3                                          
+## 4                                          
+## 5                       X                  
+## 6                                          
+## 7                                          
+## 8                                          
+## 9             X                           X
+## 10                                         
+## 11                                         
+## 12                                         
+## 13                                         
+## 14                                         
+## 15                                         
+## 16                                         
+## 17                                         
+## 18                                         
+## 19                                         
+## 20                                         
+## 21                                         
+## 22                      X                  
+## 23                                         
+## 24                                         
+## 25                                         
+## 26                      X                  
+## 27                                         
+## 28                                         
+## 29                                         
+## 30                                         
+## 31                                         
+## 32                                         
+## 33                                         
+## 34                      X                  
+## 35                      X                  
+## 36                                         
+## 37                                         
+## 38                                         
+## 39                                         
+## 40                                         
+## 41                                         
+## 42                                         
+## 43                                         
+## 44                                         
+## 45                                         
+## 46                                         
+## 47                                         
+## 48                                         
+## 49                                         
+## 50                                         
+## 51                                         
+## 52                                         
+## 53                                         
+## 54                                         
+## 55                                        X
 ```
 
 
