@@ -145,9 +145,8 @@ cocktail_many
 Create a matrix that shows all cocktail names as rows and all ingredients as columns. When a cocktail requires an ingredient, there should be an "X" in the cell, otherwise, the cell should remain empty. Example:
 
 ```{r}
-cheatsheet <- dcast(cocktail_fix, name ~ ingredients, length)
-cheatsheet[cheatsheet == 0] <- ""
-cheatsheet[cheatsheet == 1] <- "X"
+cheatsheet <- table(cocktail_fix$name, cocktail_fix$ingredients)
+cheatsheet <- ifelse(cheatsheet == 0, "","x")
 cheatsheet
 ```
 
